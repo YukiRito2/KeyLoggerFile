@@ -1,0 +1,6 @@
+#ejecuta esto en la terminal
+#pip install -r requirements.txt
+
+pynput
+dhooks
+requests
