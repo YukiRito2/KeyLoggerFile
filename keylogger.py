@@ -9,7 +9,7 @@ import sys
 # URL del webhook
 WEBHOOK_URL = os.getenv(
     "DISCORD_WEBHOOK_URL",
-    "https://discord.com/api/webhooks/1257403688264270016/Nx2xq3OEwEK3bYNZn-3dCLaw7u_4O665GZKiV5wOofbg-B62wGUWtKKBtcpuQsv78q1z",
+    "",
 )
 TIME_INTERVAL = 60
 
